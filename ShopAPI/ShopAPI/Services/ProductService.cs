@@ -1,6 +1,35 @@
-﻿namespace ShopAPI.Services;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using ShopAPI.DataTransferObjects;
+using ShopAPI.Services.Interfaces;
+using ShopAPI.Models;
 
-public class ProductService
+namespace ShopAPI.Services;
+
+public class ProductService : IProductService
 {
-    
+    public Task<Product> AddProduct(ProductDTO productDto)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<Product> GetProductById(int id)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<IEnumerable<Product>> GetProducts()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<Product> UpdateProduct(ProductDTO productDto)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<bool> DeleteProduct(int id)
+    {
+        throw new System.NotImplementedException();
+    }
 }
