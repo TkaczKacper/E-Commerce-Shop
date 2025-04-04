@@ -5,13 +5,13 @@ namespace ShopAPI.DataTransferObjects;
 
 public class ProductDTO
 {
-    [Required]
+    [Required(ErrorMessage = "Product name is required.")]
     [MinLength(3, ErrorMessage = "Product name must be at least 3 characters long.")]
     [JsonPropertyName("name")]
     public required string ProductName { get; set; }
     
-    [Required]
-    [JsonPropertyName("price")]
+    [Required(ErrorMessage = "Product price is required.")]
     [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
-    public decimal Price { get; set; }
+    [JsonPropertyName("price")]
+    public required decimal Price { get; set; }
 }

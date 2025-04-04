@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web.Http.ModelBinding;
 using ShopAPI.Data;
 using ShopAPI.DataTransferObjects;
 using ShopAPI.Services.Interfaces;
@@ -16,7 +17,7 @@ public class ProductService : IProductService
         _context = context;
     }
     
-    public async Task<Product> AddProduct(ProductDTO productDto)
+    public async Task<Product> AddProduct(ProductDTO? productDto)
     {
         var productToAdd = new Product
         {

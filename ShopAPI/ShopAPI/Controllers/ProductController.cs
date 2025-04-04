@@ -20,8 +20,13 @@ public class ProductController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Employee")]
-    public async Task<IActionResult> CreateProduct([FromBody] ProductDTO productDto)
+    public async Task<IActionResult> CreateProduct([FromBody] ProductDTO? productDto)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
         var res = await _productService.AddProduct(productDto);
         
         return Ok(res);

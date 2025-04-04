@@ -1,6 +1,9 @@
 ﻿namespace ShopAPI.Models.Enums;
 
-public class NegotiationStatus
+public enum NegotiationStatus
 {
-    
+    Pending,
+    Accepted,
+    Rejected,
+    Canceled
 }
