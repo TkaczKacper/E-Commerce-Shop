@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using ShopAPI.Data;
 using ShopAPI.DataTransferObjects;
 using ShopAPI.Services.Interfaces;
 using ShopAPI.Models;
@@ -8,10 +9,25 @@ namespace ShopAPI.Services;
 
 public class ProductService : IProductService
 {
-    
-    public Task<Product> AddProduct(ProductDTO productDto)
+    private readonly AppDbContext _context;
+
+    public ProductService(AppDbContext context)
     {
-        throw new System.NotImplementedException();
+        _context = context;
+    }
+    
+    public async Task<Product> AddProduct(ProductDTO productDto)
+    {
+        var productToAdd = new Product
+        {
+            Name = productDto.ProductName,
+            Price = productDto.Price
+        };
+        
+        var product = _context.Products.Add(productToAdd);
+        await _context.SaveChangesAsync();
+
+        return product.Entity;
     }
 
     public Task<Product?> GetProductById(int id)
