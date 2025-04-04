@@ -1,23 +1,33 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShopAPI.DataTransferObjects;
 using ShopAPI.Services;
+using ShopAPI.Services.Interfaces;
 
 namespace ShopAPI.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/token")]
 public class TokenController : ControllerBase
 {
-    private readonly TokenService _tokenService;
+    private readonly ITokenService _tokenService;
 
-    public TokenController(TokenService tokenService)
+    public TokenController(ITokenService tokenService)
     {
         _tokenService = tokenService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login([FromBody] string email, [FromBody] string password)
+    public async Task<IActionResult> Login([FromBody] LoginDTO? loginDto)
     {
-        return null;
+        if (loginDto is null)
+            return BadRequest();
+
+        var accessToken = _tokenService.GenerateAccessToken(loginDto.Username, loginDto.Email);
+        
+        Response.Headers.Append("Authorization", $"Bearer {accessToken}");
+        
+        return Ok(accessToken);
     }
 }

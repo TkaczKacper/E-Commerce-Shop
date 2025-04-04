@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShopAPI.Data;
+using ShopAPI.Services;
+using ShopAPI.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,6 +72,8 @@ var builder = WebApplication.CreateBuilder(args);
                     System.Text.Encoding.UTF8.GetBytes(configuration["Authentication:JwtBearer:SecurityKey"]))
             };
         });
+
+    services.AddScoped<ITokenService, TokenService>();
 }
 
 var app = builder.Build();

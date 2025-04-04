@@ -8,6 +8,8 @@ using ShopAPI.Services.Interfaces;
 
 namespace ShopAPI.Controllers;
 
+[ApiController]
+[Route("api/v1/negotiation")]
 public class NegotiationController : ControllerBase
 {
     public readonly INegotiationService _negotiationService;

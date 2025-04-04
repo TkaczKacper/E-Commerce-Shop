@@ -3,5 +3,5 @@
 public interface ITokenService
 {
     string GenerateAccessToken(string username, string password);
-    string ValidateAccessToken(string token);
+    string ValidateAccessToken(string? token);
 }

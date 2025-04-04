@@ -7,6 +7,8 @@ using ShopAPI.Services.Interfaces;
 
 namespace ShopAPI.Controllers;
 
+[ApiController]
+[Route("api/v1/product")]
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
