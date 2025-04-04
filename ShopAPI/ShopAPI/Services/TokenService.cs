@@ -28,6 +28,7 @@ public class TokenService : ITokenService
         {
             new Claim(ClaimTypes.Name, username),
             new Claim(ClaimTypes.Email, username),
+            new Claim(ClaimTypes.Role, "Employee"),
         };
         
         var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
@@ -64,9 +65,9 @@ public class TokenService : ITokenService
             }, out SecurityToken validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
-            var username = jwtToken.Claims.First(x => x.Type == ClaimTypes.Name).Value;
+            var role = jwtToken.Claims.First(x => x.Type == ClaimTypes.Role).Value;
 
-            return username;
+            return role;
         }
         catch
         {

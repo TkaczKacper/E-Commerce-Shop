@@ -74,6 +74,8 @@ var builder = WebApplication.CreateBuilder(args);
         });
 
     services.AddScoped<ITokenService, TokenService>();
+    services.AddScoped<IProductService, ProductService>();
+    services.AddScoped<INegotiationService, NegotiationService>();
 }
 
 var app = builder.Build();

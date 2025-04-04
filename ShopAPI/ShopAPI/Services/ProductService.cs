@@ -8,12 +8,13 @@ namespace ShopAPI.Services;
 
 public class ProductService : IProductService
 {
+    
     public Task<Product> AddProduct(ProductDTO productDto)
     {
         throw new System.NotImplementedException();
     }
 
-    public Task<Product> GetProductById(int id)
+    public Task<Product?> GetProductById(int id)
     {
         throw new System.NotImplementedException();
     }
@@ -23,7 +24,7 @@ public class ProductService : IProductService
         throw new System.NotImplementedException();
     }
 
-    public Task<Product> UpdateProduct(ProductDTO productDto)
+    public Task<Product?> UpdateProduct(int productId, ProductDTO productDto)
     {
         throw new System.NotImplementedException();
     }

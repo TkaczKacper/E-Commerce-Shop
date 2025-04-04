@@ -22,30 +22,49 @@ public class ProductController : ControllerBase
     [Authorize(Roles = "Employee")]
     public async Task<IActionResult> CreateProduct([FromBody] ProductDTO productDto)
     {
-        return null;
+        var res = await _productService.AddProduct(productDto);
+        
+        return Ok(res);
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllProducts()
     {
-        return null;
+        var res = await _productService.GetProducts();
+       
+        return Ok(res);
     }
 
     [HttpGet("{productId:int}")]
     public async Task<IActionResult> GetProductById(int productId)
     {
-        return null;
+        var res = await _productService.GetProductById(productId);
+        
+        if (res is null)
+            return NotFound("Product not found");
+        
+        return Ok(res);
     }
 
     [HttpPatch("{productId:int}")]
     public async Task<IActionResult> UpdateProduct(int productId, [FromBody] ProductDTO productDto)
     {
-        return null;
+        var res = await _productService.UpdateProduct(productId, productDto);
+        
+        if (res is null)
+            return NotFound("Product not found.");
+        
+        return Ok(res);
     }
 
     [HttpDelete("{productId:int}")]
     public async Task<IActionResult> DeleteProduct(int productId)
     {
-        return null;
+        var res = await _productService.DeleteProduct(productId);
+
+        if (res)
+            return NoContent();
+        
+        return NotFound("Product not found.");
     }
 }
