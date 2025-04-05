@@ -51,8 +51,18 @@ public class ProductService : IProductService
         throw new System.NotImplementedException();
     }
 
-    public Task<bool> DeleteProduct(int id)
+    public async Task<bool> DeleteProduct(int id)
     {
-        throw new System.NotImplementedException();
+        var product = await _context.Products.FindAsync(id);
+
+        if (product is null)
+        {
+            return false;
+        }
+        
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 }

@@ -9,6 +9,7 @@ namespace ShopAPI.Controllers;
 
 [ApiController]
 [Route("api/v1/product")]
+[Authorize(Roles = "Employee")]
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
@@ -19,7 +20,6 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Employee")]
     public async Task<IActionResult> CreateProduct([FromBody] ProductDTO? productDto)
     {
         if (!ModelState.IsValid)
@@ -33,6 +33,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllProducts()
     {
         var res = await _productService.GetProducts();
@@ -41,6 +42,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("{productId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetProductById(int productId)
     {
         var res = await _productService.GetProductById(productId);
