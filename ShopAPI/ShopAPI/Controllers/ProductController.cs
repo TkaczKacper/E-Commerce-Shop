@@ -20,7 +20,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateProduct([FromBody] ProductDTO? productDto)
+    public async Task<IActionResult> CreateProduct([FromBody] AddProductDTO? productDto)
     {
         if (!ModelState.IsValid)
         {
@@ -54,9 +54,9 @@ public class ProductController : ControllerBase
     }
 
     [HttpPatch("{productId:int}")]
-    public async Task<IActionResult> UpdateProduct(int productId, [FromBody] ProductDTO productDto)
+    public async Task<IActionResult> UpdateProduct(int productId, [FromBody] UpdateProductDTO updateProductDto)
     {
-        var res = await _productService.UpdateProduct(productId, productDto);
+        var res = await _productService.UpdateProduct(productId, updateProductDto);
         
         if (res is null)
             return NotFound("Product not found.");

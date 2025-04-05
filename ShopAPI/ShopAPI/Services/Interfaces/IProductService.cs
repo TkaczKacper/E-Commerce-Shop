@@ -7,9 +7,9 @@ namespace ShopAPI.Services.Interfaces;
 
 public interface IProductService
 {
-        Task<Product> AddProduct(ProductDTO productDto);
+        Task<Product> AddProduct(AddProductDTO addProductDto);
         Task<Product?> GetProductById(int id);
         Task<List<Product>> GetProducts();
-        Task<Product?> UpdateProduct(int id, ProductDTO productDto);
+        Task<Product?> UpdateProduct(int id, UpdateProductDTO updateProductDto);
         Task<bool> DeleteProduct(int id);
 }

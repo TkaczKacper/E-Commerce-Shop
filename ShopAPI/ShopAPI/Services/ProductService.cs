@@ -18,7 +18,7 @@ public class ProductService : IProductService
         _context = context;
     }
     
-    public async Task<Product> AddProduct(ProductDTO? productDto)
+    public async Task<Product> AddProduct(AddProductDTO? productDto)
     {
         var productToAdd = new Product
         {
@@ -46,15 +46,15 @@ public class ProductService : IProductService
         return products;
     }
 
-    public async Task<Product?> UpdateProduct(int productId, ProductDTO productDto)
+    public async Task<Product?> UpdateProduct(int productId, UpdateProductDTO productDto)
     {
         var product = await _context.Products.FindAsync(productId);
         
         if (product is null)
             return null;
         
-        product.Name = productDto.ProductName;
-        product.Price = productDto.Price;
+        product.Name = productDto.ProductName ?? product.Name;
+        product.Price = productDto.Price ?? product.Price;
         
         _context.Products.Update(product);
         await _context.SaveChangesAsync();
