@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using ShopAPI.Data;
 using ShopAPI.DataTransferObjects;
 using ShopAPI.Services.Interfaces;
@@ -38,9 +39,11 @@ public class ProductService : IProductService
         return product;
     }
 
-    public Task<IEnumerable<Product>> GetProducts()
+    public Task<List<Product>> GetProducts()
     {
-        throw new System.NotImplementedException();
+        var products = _context.Products.ToListAsync();
+        
+        return products;
     }
 
     public Task<Product?> UpdateProduct(int productId, ProductDTO productDto)
