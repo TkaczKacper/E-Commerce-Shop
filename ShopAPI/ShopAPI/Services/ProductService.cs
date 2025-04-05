@@ -31,9 +31,11 @@ public class ProductService : IProductService
         return product.Entity;
     }
 
-    public Task<Product?> GetProductById(int id)
+    public async Task<Product?> GetProductById(int id)
     {
-        throw new System.NotImplementedException();
+        var product = await _context.Products.FindAsync(id);
+
+        return product;
     }
 
     public Task<IEnumerable<Product>> GetProducts()
