@@ -46,9 +46,20 @@ public class ProductService : IProductService
         return products;
     }
 
-    public Task<Product?> UpdateProduct(int productId, ProductDTO productDto)
+    public async Task<Product?> UpdateProduct(int productId, ProductDTO productDto)
     {
-        throw new System.NotImplementedException();
+        var product = await _context.Products.FindAsync(productId);
+        
+        if (product is null)
+            return null;
+        
+        product.Name = productDto.ProductName;
+        product.Price = productDto.Price;
+        
+        _context.Products.Update(product);
+        await _context.SaveChangesAsync();
+        
+        return product;
     }
 
     public async Task<bool> DeleteProduct(int id)
