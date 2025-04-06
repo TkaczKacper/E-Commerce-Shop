@@ -10,7 +10,7 @@ public interface INegotiationService
 {
     Task<Negotiation> GetNegotiationAsync(int negotiationId);
     Task<IEnumerable<Negotiation>> GetNegotiationsAsync();
-    Task<Negotiation?> StartNegotiationAsync(int productId, NegotiationDTO negotiationDto);
+    Task<Negotiation> StartNegotiationAsync(NegotiationDTO negotiationDto);
     Task<Negotiation> UpdateNegotiationAsync(NegotiationDTO negotiationDto);
     Task<Negotiation> CancelNegotiationAsync(NegotiationDTO negotiationDto);
 }

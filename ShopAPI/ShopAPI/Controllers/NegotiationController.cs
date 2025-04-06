@@ -22,7 +22,12 @@ public class NegotiationController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> StartNegotiation([FromBody] NegotiationDTO negotiationDto)
     {
-        return null;
+        var clientId = HttpContext.Connection.RemoteIpAddress?.ToString();
+        negotiationDto.ClientId = clientId;
+        
+        var res = await _negotiationService.StartNegotiationAsync(negotiationDto);
+        
+        return Ok(res);
     }
 
     [HttpPatch("{negotiationId:int}/respond")]
