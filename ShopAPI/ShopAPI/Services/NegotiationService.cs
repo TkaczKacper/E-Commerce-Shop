@@ -33,9 +33,11 @@ public class NegotiationService : INegotiationService
         return negotiation;
     }
 
-    public Task<IEnumerable<Negotiation>> GetNegotiationsAsync()
+    public async Task<IEnumerable<Negotiation>> GetNegotiationsAsync()
     {
-        throw new System.NotImplementedException();
+        var negotiations = await _context.Negotiations.ToListAsync();
+        
+        return negotiations;
     }
 
     public async Task<Negotiation> StartNegotiationAsync(NegotiationDTO negotiationDto)

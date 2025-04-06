@@ -54,6 +54,8 @@ public class NegotiationController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllNegotiations()
     {
-        return null;
+        var negotiations = await _negotiationService.GetNegotiationsAsync();
+        
+        return Ok(negotiations);
     }
 }
