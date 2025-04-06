@@ -20,9 +20,14 @@ public class NegotiationService : INegotiationService
         _context = context;
     }
     
-    public Task<Negotiation> GetNegotiationAsync(int negotiationId)
+    public async Task<Negotiation> GetNegotiationAsync(int negotiationId)
     {
-        throw new System.NotImplementedException();
+        var negotiation = await _context.Negotiations.FindAsync(negotiationId);
+
+        if (negotiation == null)
+            throw new KeyNotFoundException("Requested negotiation was not found.");
+        
+        return negotiation;
     }
 
     public Task<IEnumerable<Negotiation>> GetNegotiationsAsync()

@@ -46,7 +46,9 @@ public class NegotiationController : ControllerBase
     [HttpGet("{negotiationId:int}")]
     public async Task<IActionResult> GetNegotiation(int negotiationId)
     {
-        return null;
+        var negotiation = await _negotiationService.GetNegotiationAsync(negotiationId);
+        
+        return Ok(negotiation);
     }
 
     [HttpGet]
