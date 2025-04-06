@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "35f9b265-0cc0-45bc-ba5d-13c48187bfd2",
+		"name": "E-Commerce-Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25348560"
+	},
+	"item": [
+		{
+			"name": "Token Controller",
+			"item": [
+				{
+					"name": "Generate Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"string\",\r\n    \"email\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5181/api/v1/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Controller",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"string\",\r\n    \"price\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5181/api/v1/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5181/api/v1/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5181/api/v1/product/{{productId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{productId}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"string\",\r\n    \"price\": 23\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5181/api/v1/product/{{productId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request Copy 4",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5181/api/v1/product/{{productId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negotiation Controller",
+			"item": [
+				{
+					"name": "Start Negotiation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"proposed_price\": 23,\r\n    \"product_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5181/api/v1/negotiation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"negotiation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Negotiations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5181/api/v1/negotiation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"negotiation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Negotiation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5181/api/v1/negotiation/{{negotiationId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"negotiation",
+								"{{negotiationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Respond To Negotiation",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "true",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5181/api/v1/negotiation/{{negotiationId}}/respond",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"negotiation",
+								"{{negotiationId}}",
+								"respond"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Propose New Price",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "123312",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5181/api/v1/negotiation/{{negotiationId}}/propose",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"negotiation",
+								"{{negotiationId}}",
+								"propose"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Negotiation",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5181/api/v1/negotiation/{{negotiationId}}/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5181",
+							"path": [
+								"api",
+								"v1",
+								"negotiation",
+								"{{negotiationId}}",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRW1wbG95ZWUiLCJleHAiOjE3NDM5ODExNDUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4MSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4MSJ9.tfa7RwKuLfALF9xw2GtRJnbI1qaTZWDpGujNH6RdKBAzTgUiN2w_H2bNzlmeim8ace9uj0GVdBN5W-QUqkQWWw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
