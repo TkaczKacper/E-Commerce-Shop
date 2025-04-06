@@ -83,7 +83,12 @@ public class NegotiationService : INegotiationService
         return newNegotiation;
     }
 
-    public Task<Negotiation> UpdateNegotiationAsync(NegotiationDTO negotiationDto)
+    public Task<Negotiation> ProposeNewPrice(NegotiationDTO negotiationDto)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<Negotiation> RespondToNegotiation(int negotiationId, bool accepted)
     {
         throw new System.NotImplementedException();
     }

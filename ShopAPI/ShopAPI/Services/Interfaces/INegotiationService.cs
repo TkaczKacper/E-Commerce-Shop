@@ -11,6 +11,7 @@ public interface INegotiationService
     Task<Negotiation> GetNegotiationAsync(int negotiationId);
     Task<IEnumerable<Negotiation>> GetNegotiationsAsync();
     Task<Negotiation> StartNegotiationAsync(NegotiationDTO negotiationDto);
-    Task<Negotiation> UpdateNegotiationAsync(NegotiationDTO negotiationDto);
+    Task<Negotiation> ProposeNewPrice(NegotiationDTO negotiationDto);
+    Task<Negotiation> RespondToNegotiation(int negotiationId, bool accept);
     Task<Negotiation> CancelNegotiationAsync(NegotiationDTO negotiationDto);
 }

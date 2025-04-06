@@ -34,6 +34,7 @@ public class NegotiationController : ControllerBase
     [Authorize(Roles = "Employee")]
     public async Task<IActionResult> RespondToNegotiation(int negotiationId, [FromBody] bool accept)
     {
+        
         return null;
     }
 
