@@ -25,9 +25,9 @@ public class NegotiationController : ControllerBase
         var clientId = HttpContext.Connection.RemoteIpAddress?.ToString();
         negotiationDto.ClientId = clientId;
         
-        var res = await _negotiationService.StartNegotiationAsync(negotiationDto);
+        var negotiation = await _negotiationService.StartNegotiationAsync(negotiationDto);
         
-        return Ok(res);
+        return Ok(negotiation);
     }
 
     [HttpPatch("{negotiationId:int}/respond")]
@@ -61,5 +61,13 @@ public class NegotiationController : ControllerBase
         var negotiations = await _negotiationService.GetNegotiationsAsync();
         
         return Ok(negotiations);
+    }
+
+    [HttpPatch("{negotiationId:int}/cancel")]
+    public async Task<IActionResult> CancelNegotiation(int negotiationId)
+    {
+        var res = await _negotiationService.CancelNegotiationAsync(negotiationId);
+        
+        return Ok(res);
     }
 }

@@ -162,8 +162,23 @@ public class NegotiationService : INegotiationService
         return respondMessage;
     }
 
-    public Task<Negotiation> CancelNegotiationAsync(NegotiationDTO negotiationDto)
+    public async Task<string> CancelNegotiationAsync(int negotiationId)
     {
-        throw new System.NotImplementedException();
+        var negotiation = await _context.Negotiations.FindAsync(negotiationId);
+        
+        if (negotiation is null)
+            throw new KeyNotFoundException("Requested negotiation was not found.");
+        
+        if (negotiation.Status == NegotiationStatus.Canceled)
+            throw new GoneException("Negotiation has already been canceled.");
+        
+        negotiation.Status = NegotiationStatus.Canceled;
+        negotiation.UpdatedAt = DateTime.UtcNow;
+        negotiation.CancellationReason = "Negotiation has been canceled manually.";
+        
+        _context.Negotiations.Update(negotiation);
+        await _context.SaveChangesAsync();
+        
+        return "Negotiation cancelled.";
     }
 }
