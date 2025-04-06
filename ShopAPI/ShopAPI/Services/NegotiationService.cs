@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using ShopAPI.Data;
 using ShopAPI.DataTransferObjects;
+using ShopAPI.Helpers.Exceptions;
 using ShopAPI.Services.Interfaces;
 using ShopAPI.Models;
 using ShopAPI.Models.Enums;
@@ -44,6 +47,14 @@ public class NegotiationService : INegotiationService
         
         var productId = negotiationDto.ProductId;
         var proposedPrice = (decimal)negotiationDto.ProposedPrice;
+        var clientId = negotiationDto.ClientId;
+
+        var negotiation = await _context.Negotiations.FirstOrDefaultAsync(n =>
+            n.ProductId == productId &&
+            n.ClientId == clientId);
+        
+        if (negotiation is not null)
+            throw new ConflictException($"You already started negotiation for this product. Check negotiation id: {negotiation.Id}");
         
         var product = await _context.Products.FindAsync(negotiationDto.ProductId);
 
@@ -53,7 +64,7 @@ public class NegotiationService : INegotiationService
         }
 
 
-        var negotiation = new Negotiation
+        var newNegotiation = new Negotiation
         {
             ProductId = productId,
             ClientId = negotiationDto.ClientId,
@@ -64,10 +75,10 @@ public class NegotiationService : INegotiationService
             UpdatedAt = DateTime.UtcNow
         };
         
-        _context.Negotiations.Add(negotiation);
+        _context.Negotiations.Add(newNegotiation);
         await _context.SaveChangesAsync();
         
-        return negotiation;
+        return newNegotiation;
     }
 
     public Task<Negotiation> UpdateNegotiationAsync(NegotiationDTO negotiationDto)

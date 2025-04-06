@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using ShopAPI.Helpers.Exceptions;
 
 namespace ShopAPI.Helpers.Middlewares;
 
@@ -32,6 +33,13 @@ public class ExceptionHandlingMiddleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = StatusCodes.Status404NotFound;
 
+            await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+        }
+        catch (ConflictException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status409Conflict;
+            
             await context.Response.WriteAsJsonAsync(new { error = ex.Message });
         }
         catch (Exception ex)
