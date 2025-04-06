@@ -17,4 +17,6 @@ public class Negotiation
     public DateTime UpdatedAt { get; set; }
     public int AttemptCount { get; set; }
     public NegotiationStatus Status { get; set; }
+
+    public string? CancellationReason { get; set; }
 }

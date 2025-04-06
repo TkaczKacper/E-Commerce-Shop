@@ -39,6 +39,13 @@ public class ExceptionHandlingMiddleware
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = StatusCodes.Status409Conflict;
+
+            await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+        }
+        catch (BadHttpRequestException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
             
             await context.Response.WriteAsJsonAsync(new { error = ex.Message });
         }

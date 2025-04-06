@@ -42,7 +42,9 @@ public class NegotiationController : ControllerBase
     [HttpPatch("{negotiationId:int}/propose")]
     public async Task<IActionResult> ProposeNewPrice(int negotiationId, [FromBody] decimal newPrice)
     {
-        return null;
+        var negotiation = await _negotiationService.ProposeNewPrice(negotiationId, newPrice);
+        
+        return Ok(negotiation);
     }
 
     [HttpGet("{negotiationId:int}")]
