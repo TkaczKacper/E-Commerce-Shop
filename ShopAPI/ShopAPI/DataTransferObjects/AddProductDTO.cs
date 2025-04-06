@@ -13,5 +13,5 @@ public class AddProductDTO
     [Required(ErrorMessage = "Product price is required.")]
     [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
     [JsonPropertyName("price")]
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
 }

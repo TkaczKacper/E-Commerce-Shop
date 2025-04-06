@@ -1,14 +1,12 @@
-using System;
-using System.Linq;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShopAPI.Data;
+using ShopAPI.Helpers.Middlewares;
 using ShopAPI.Services;
 using ShopAPI.Services.Interfaces;
 
@@ -99,6 +97,8 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowCredentials()
 );
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

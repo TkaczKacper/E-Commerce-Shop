@@ -23,7 +23,7 @@ public class ProductService : IProductService
         var productToAdd = new Product
         {
             Name = productDto.ProductName,
-            Price = productDto.Price
+            Price = productDto.Price ?? 0
         };
         
         var product = _context.Products.Add(productToAdd);
@@ -32,10 +32,13 @@ public class ProductService : IProductService
         return product.Entity;
     }
 
-    public async Task<Product?> GetProductById(int id)
+    public async Task<Product?> GetProductById(int productId)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products.FindAsync(productId);
 
+        if (product is null)
+            throw new KeyNotFoundException($"Product with id {productId} not found.");
+        
         return product;
     }
 
@@ -51,7 +54,7 @@ public class ProductService : IProductService
         var product = await _context.Products.FindAsync(productId);
         
         if (product is null)
-            return null;
+            throw new KeyNotFoundException($"Product with id {productId} not found.");
         
         product.Name = productDto.ProductName ?? product.Name;
         product.Price = productDto.Price ?? product.Price;
@@ -62,14 +65,12 @@ public class ProductService : IProductService
         return product;
     }
 
-    public async Task<bool> DeleteProduct(int id)
+    public async Task<bool> DeleteProduct(int productId)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products.FindAsync(productId);
 
         if (product is null)
-        {
-            return false;
-        }
+            throw new KeyNotFoundException($"Product with id {productId} not found.");
         
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();

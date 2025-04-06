@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAPI.DataTransferObjects;
@@ -45,33 +46,23 @@ public class ProductController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetProductById(int productId)
     {
-        var res = await _productService.GetProductById(productId);
+        var product = await _productService.GetProductById(productId);
         
-        if (res is null)
-            return NotFound("Product not found");
-        
-        return Ok(res);
+        return Ok(product);
     }
 
     [HttpPatch("{productId:int}")]
     public async Task<IActionResult> UpdateProduct(int productId, [FromBody] UpdateProductDTO updateProductDto)
     {
-        var res = await _productService.UpdateProduct(productId, updateProductDto);
-        
-        if (res is null)
-            return NotFound("Product not found.");
-        
-        return Ok(res);
+        var updatedProduct = await _productService.UpdateProduct(productId, updateProductDto);
+        return Ok(updatedProduct);
     }
 
     [HttpDelete("{productId:int}")]
     public async Task<IActionResult> DeleteProduct(int productId)
     {
         var res = await _productService.DeleteProduct(productId);
-
-        if (res)
-            return NoContent();
-        
-        return NotFound("Product not found.");
+            
+        return res ? Ok("Product deleted.") : BadRequest("Something went wrong, try again later.");
     }
 }
