@@ -27,7 +27,7 @@ public class NegotiationController : ControllerBase
         
         var negotiation = await _negotiationService.StartNegotiationAsync(negotiationDto);
         
-        return Ok(negotiation);
+        return StatusCode(201, negotiation);
     }
 
     [HttpPatch("{negotiationId:int}/respond")]

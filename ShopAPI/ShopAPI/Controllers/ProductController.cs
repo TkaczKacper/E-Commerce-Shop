@@ -30,7 +30,7 @@ public class ProductController : ControllerBase
         
         var res = await _productService.AddProduct(productDto);
         
-        return Ok(res);
+        return StatusCode(201, res);
     }
 
     [HttpGet]
@@ -63,6 +63,6 @@ public class ProductController : ControllerBase
     {
         var res = await _productService.DeleteProduct(productId);
             
-        return res ? Ok("Product deleted.") : BadRequest("Something went wrong, try again later.");
+        return res ? NoContent() : BadRequest("Something went wrong, try again later.");
     }
 }
