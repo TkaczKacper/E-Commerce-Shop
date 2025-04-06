@@ -46,6 +46,20 @@ public class ExceptionHandlingMiddleware
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+            await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+        }
+        catch (GoneException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status410Gone;
+
+            await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+        }
+        catch (UnprocessableContentException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             
             await context.Response.WriteAsJsonAsync(new { error = ex.Message });
         }
