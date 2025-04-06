@@ -34,8 +34,9 @@ public class NegotiationController : ControllerBase
     [Authorize(Roles = "Employee")]
     public async Task<IActionResult> RespondToNegotiation(int negotiationId, [FromBody] bool accept)
     {
-        
-        return null;
+        var res = await _negotiationService.RespondToNegotiation(negotiationId, accept);
+
+        return Ok(res);
     }
 
     [HttpPatch("{negotiationId:int}/propose")]

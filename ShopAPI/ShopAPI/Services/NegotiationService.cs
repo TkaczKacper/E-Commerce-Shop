@@ -88,9 +88,34 @@ public class NegotiationService : INegotiationService
         throw new System.NotImplementedException();
     }
 
-    public Task<Negotiation> RespondToNegotiation(int negotiationId, bool accepted)
+    public async Task<string> RespondToNegotiation(int negotiationId, bool accepted)
     {
-        throw new System.NotImplementedException();
+        var negotiation = await _context.Negotiations.FindAsync(negotiationId);
+        
+        if (negotiation is null)
+            throw new KeyNotFoundException("Requested negotiation was not found.");
+
+        if (negotiation.Status != NegotiationStatus.Pending)
+            throw new ConflictException("This negotiation has already been responded to.");
+
+        var respondMessage = "";
+        
+        if (accepted)
+        {
+            negotiation.Status = NegotiationStatus.Accepted;
+            respondMessage = "Accepted.";
+        }
+        else
+        {
+            negotiation.Status = NegotiationStatus.Rejected;
+            respondMessage = "Rejected.";
+        }
+        
+        negotiation.UpdatedAt = DateTime.UtcNow;
+        _context.Negotiations.Update(negotiation);
+        await _context.SaveChangesAsync();
+        
+        return respondMessage;
     }
 
     public Task<Negotiation> CancelNegotiationAsync(NegotiationDTO negotiationDto)
