@@ -174,7 +174,7 @@ Proposes a new price for an ongoing negotiation.
 -  <b style="color:#E95F6A">410 Gone:</b> If negotiation has been canceled or expired.
 -  <b style="color:#E95F6A">422 Unprocessable Content:</b> If negotiation has been already accepted.
 
-### <span style="color:white;background-color:#FCB768;padding:6px;border-radius:10px">PATCH</span> `/api/v1/negotiation/{negotiationId}`
+### <span style="color:white;background-color:#FCB768;padding:6px;border-radius:10px">PATCH</span> `/api/v1/negotiation/{negotiationId}/cancel`
 
 Cancels an ongoin negotiation by its ID.
 
