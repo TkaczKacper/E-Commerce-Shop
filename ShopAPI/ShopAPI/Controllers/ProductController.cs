@@ -21,13 +21,8 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateProduct([FromBody] AddProductDTO? productDto)
+    public async Task<IActionResult> CreateProduct([FromBody] AddProductDTO productDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-        
         var res = await _productService.AddProduct(productDto);
         
         return StatusCode(201, res);
@@ -55,14 +50,15 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> UpdateProduct(int productId, [FromBody] UpdateProductDTO updateProductDto)
     {
         var updatedProduct = await _productService.UpdateProduct(productId, updateProductDto);
+        
         return Ok(updatedProduct);
     }
 
     [HttpDelete("{productId:int}")]
     public async Task<IActionResult> DeleteProduct(int productId)
     {
-        var res = await _productService.DeleteProduct(productId);
-            
-        return res ? NoContent() : BadRequest("Something went wrong, try again later.");
+        await _productService.DeleteProduct(productId);
+
+        return NoContent();
     }
 }

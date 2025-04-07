@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using ShopAPI.Data;
 using ShopAPI.DataTransferObjects;
 using ShopAPI.Services.Interfaces;
 using ShopAPI.Models;
+using ArgumentException = System.ArgumentException;
 
 namespace ShopAPI.Services;
 
@@ -20,10 +22,13 @@ public class ProductService : IProductService
     
     public async Task<Product> AddProduct(AddProductDTO? productDto)
     {
+        if (productDto.Price is <= 0)
+            throw new ArgumentException("Price must be a positive number");
+            
         var productToAdd = new Product
         {
             Name = productDto.ProductName,
-            Price = productDto.Price ?? 0
+            Price = (decimal)productDto.Price
         };
         
         var product = _context.Products.Add(productToAdd);
@@ -32,7 +37,7 @@ public class ProductService : IProductService
         return product.Entity;
     }
 
-    public async Task<Product?> GetProductById(int productId)
+    public async Task<Product> GetProductById(int productId)
     {
         var product = await _context.Products.FindAsync(productId);
 
@@ -49,9 +54,12 @@ public class ProductService : IProductService
         return products;
     }
 
-    public async Task<Product?> UpdateProduct(int productId, UpdateProductDTO productDto)
+    public async Task<Product> UpdateProduct(int productId, UpdateProductDTO productDto)
     {
         var product = await _context.Products.FindAsync(productId);
+         
+        if (productDto.Price is <= 0) 
+            throw new ArgumentException("Price must be a positive number greater than 0.");
         
         if (product is null)
             throw new KeyNotFoundException($"Product with id {productId} not found.");

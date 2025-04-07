@@ -22,7 +22,7 @@ public class TokenController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDTO? loginDto)
     {
         if (loginDto is null)
-            return BadRequest();
+            return BadRequest("Authentication failed.");
 
         var accessToken = _tokenService.GenerateAccessToken(loginDto.Username, loginDto.Email);
         

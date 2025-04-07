@@ -92,12 +92,15 @@ public class NegotiationService : INegotiationService
         if (negotiation is null)
             throw new KeyNotFoundException("Requested negotiation was not found.");
 
-        if (negotiation.Status == NegotiationStatus.Pending)
-            throw new ConflictException("Please wait for the response in this negotiation process.");
-        if (negotiation.Status == NegotiationStatus.Canceled)
-            throw new GoneException(negotiation.CancellationReason ?? "Negotiation has ben cancelled.");
-        if (negotiation.Status == NegotiationStatus.Accepted)
-            throw new UnprocessableContentException("Negotiation has been already accepted.");
+        switch (negotiation.Status)
+        {
+            case NegotiationStatus.Pending:
+                throw new ConflictException("Please wait for the response in this negotiation process.");
+            case NegotiationStatus.Canceled:
+                throw new GoneException(negotiation.CancellationReason ?? "Negotiation has ben cancelled.");
+            case NegotiationStatus.Accepted:
+                throw new UnprocessableContentException("Negotiation has been already accepted.");
+        }
 
         if ((DateTime.UtcNow - negotiation.UpdatedAt).TotalSeconds > 30)
         {

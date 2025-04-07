@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 using ShopAPI.Models.Enums;
 
 namespace ShopAPI.Models;
@@ -17,6 +18,5 @@ public class Negotiation
     public DateTime UpdatedAt { get; set; }
     public int AttemptCount { get; set; }
     public NegotiationStatus Status { get; set; }
-
     public string? CancellationReason { get; set; }
 }
