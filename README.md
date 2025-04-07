@@ -97,16 +97,15 @@ Deletes a product by its ID. Requires **_Employee_** Role.
 
 [NegotiationController](./ShopAPI/ShopAPI/Controllers/NegotiationController.cs) - processes such as starting, responding, proposing new prices, retrieving negotiations and cancelling them.
 
-### <span style="color:white;background-color:green;padding:6px;border-radius:10px">POST</span> `/api/v1/negotiation`
+### <span style="color:white;background-color:green;padding:6px;border-radius:10px">POST</span> `/api/v1/negotiation/{productId}`
 
-Starts a new negotiation for a product
+Starts a new negotiation for a product.
 
 ##### Request Body:
 
 ```JSON
 {
-  "propsed_proce": "decimal", // positive number
-  "product_id": integer       // positive number
+  "propsed_proce": decimal // positive number
 }
 ```
 

@@ -156,7 +156,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request Copy 4",
+					"name": "Delete Product",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -189,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"proposed_price\": 23,\r\n    \"product_id\": 2\r\n}",
+							"raw": "{\r\n    \"proposed_price\": 23\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,7 +197,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5181/api/v1/negotiation",
+							"raw": "http://localhost:5181/api/v1/negotiation/{{negotiationId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -206,7 +206,8 @@
 							"path": [
 								"api",
 								"v1",
-								"negotiation"
+								"negotiation",
+								"{{negotiationId}}"
 							]
 						}
 					},
@@ -350,7 +351,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRW1wbG95ZWUiLCJleHAiOjE3NDM5ODExNDUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4MSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4MSJ9.tfa7RwKuLfALF9xw2GtRJnbI1qaTZWDpGujNH6RdKBAzTgUiN2w_H2bNzlmeim8ace9uj0GVdBN5W-QUqkQWWw",
+				"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRW1wbG95ZWUiLCJleHAiOjE3NDQwNTI2MDUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4MSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4MSJ9.nxsZE6blPnA6PhvVxumbMEEYExFfE-UmqZjQAftDrOz0G-C9_BxUbbtI7zXRPKHLY8Zydkw8xIkiTVwp1FkQdw",
 				"type": "string"
 			}
 		]
