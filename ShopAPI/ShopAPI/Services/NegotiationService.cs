@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ShopAPI.Data;
 using ShopAPI.DataTransferObjects;
 using ShopAPI.Helpers.Exceptions;
@@ -18,10 +19,14 @@ namespace ShopAPI.Services;
 public class NegotiationService : INegotiationService 
 {
     private readonly AppDbContext _context;
+    private readonly IConfiguration _configuration;
 
-    public NegotiationService(AppDbContext context)
+    public NegotiationService(
+        AppDbContext context,
+        IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
     
     public async Task<Negotiation> GetNegotiationAsync(int negotiationId)
@@ -102,7 +107,9 @@ public class NegotiationService : INegotiationService
                 throw new UnprocessableContentException("Negotiation has been already accepted.");
         }
 
-        if ((DateTime.UtcNow - negotiation.UpdatedAt).TotalSeconds > 30)
+        var validationPeriod = int.Parse(_configuration["ValidationRules:AnsweringPeriod"]);
+
+        if ((DateTime.UtcNow - negotiation.UpdatedAt).TotalSeconds > validationPeriod)
         {
             negotiation.Status = NegotiationStatus.Canceled;
             negotiation.UpdatedAt = DateTime.UtcNow;

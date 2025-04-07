@@ -19,9 +19,10 @@ public class NegotiationController : ControllerBase
         _negotiationService = negotiationService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> StartNegotiation([FromBody] NegotiationDTO negotiationDto)
+    [HttpPost("{productId:int}")]
+    public async Task<IActionResult> StartNegotiation(int productId, [FromBody] NegotiationDTO negotiationDto)
     {
+        negotiationDto.ProductId = productId;
         var clientId = HttpContext.Connection.RemoteIpAddress?.ToString();
         negotiationDto.ClientId = clientId;
         
