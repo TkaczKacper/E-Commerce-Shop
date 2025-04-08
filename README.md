@@ -47,6 +47,7 @@ Creates a new product. Requires **_Employee_** role.
 
 -  <b style="color:#12CA93">201 Created:</b> Returns the created product.
 -  <b style="color:#E95F6A">400 Bad Request:</b> If validation fails.
+-  <b style="color:#E95F6A">401 Unauthorized:</b> If request send by unauthorized Employee
 
 ### <span style="color:white;background-color:#61AFEE;padding:6px;border-radius:10px">GET</span> `/api/v1/product`
 
@@ -82,6 +83,7 @@ Updates an existing product. Requires **_Employee_** role.
 
 -  <b style="color:#12CA93">200 OK:</b> Returns the updated product.
 -  <b style="color:#E95F6A">400 Bad Request:</b> If validation fails.
+-  <b style="color:#E95F6A">401 Unauthorized:</b> If request send by unauthorized Employee
 -  <b style="color:#E95F6A">404 Not Found:</b> If product not found in database.
 
 ### <span style="color:white;background-color:#E95F6A;padding:6px;border-radius:10px">DELETE</span> `/api/v1/product/{productId}`
@@ -91,6 +93,7 @@ Deletes a product by its ID. Requires **_Employee_** Role.
 #### Response:
 
 -  <b style="color:#12CA93">204 No Content:</b> If product succesfully deleted.
+-  <b style="color:#E95F6A">401 Unauthorized:</b> If request send by unauthorized Employee
 -  <b style="color:#E95F6A">404 Not Found:</b> If product not found in database.
 
 # Negotiation Management
@@ -149,6 +152,7 @@ Responds to a negotiation (accept or reject). Requires **_Employee_** role.
 
 -  <b style="color:#12CA93">200 OK:</b> Returns the respond message.
 -  <b style="color:#E95F6A">400 Bad Request:</b> If validation fails.
+-  <b style="color:#E95F6A">401 Unauthorized:</b> If request send by unauthorized Employee
 -  <b style="color:#E95F6A">404 Not Found:</b> If negotiation not found in database.
 -  <b style="color:#E95F6A">409 Conflict:</b> If negotiation was already beed responded to.
 -  <b style="color:#E95F6A">410 Gone:</b> If negotiation has been canceled.
