@@ -7,13 +7,16 @@ namespace ShopApiTest;
 
 public class AuthenticationTests : IClassFixture<ShopApiApplicationFactory>
 {
+    private readonly HttpClient _client;
+
+    public AuthenticationTests(ShopApiApplicationFactory factory)
+    {
+        _client = factory.CreateClient();
+    }
+    
     [Fact]
     public async Task GetToken_GeneratesAccessToken()
     {
-        var application = new ShopApiApplicationFactory();
-        var client = application.CreateClient();
-        
-        
         var requestBody = new
         {
             username = "testuser",
@@ -22,7 +25,7 @@ public class AuthenticationTests : IClassFixture<ShopApiApplicationFactory>
         
         var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
         
-        var response = await client.PostAsync("/api/v1/token", content);
+        var response = await _client.PostAsync("/api/v1/token", content);
         
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
@@ -30,9 +33,7 @@ public class AuthenticationTests : IClassFixture<ShopApiApplicationFactory>
     [Fact]
     public async Task GetToken_ReturnsBadRequest()
     {
-        var client = new ShopApiApplicationFactory().CreateClient();
-
-        var response = await client.PostAsync("/api/v1/token", null);
+        var response = await _client.PostAsync("/api/v1/token", null);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }

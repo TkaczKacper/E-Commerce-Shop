@@ -12,9 +12,8 @@ using ShopAPI.Services.Interfaces;
 
 namespace ShopApiTest;
 
-internal class ShopApiApplicationFactory : WebApplicationFactory<Program>, IDisposable
+public class ShopApiApplicationFactory : WebApplicationFactory<Program>
 {
-    public HttpClient Client { get; private set; }
     public IConfiguration Configuration { get; private set; }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -37,6 +36,11 @@ internal class ShopApiApplicationFactory : WebApplicationFactory<Program>, IDisp
             services.AddAuthentication("TestScheme")
                 .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
                 "TestScheme", options => { });
+            
+            services.AddAuthorization(o =>
+            {
+                o.AddPolicy("RequireAuth", policy => policy.RequireAuthenticatedUser());
+            });
                 
             services.AddDbContext<AppDbContext>(o => 
                 o.UseInMemoryDatabase("ShopDatabase"));
