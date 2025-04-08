@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>61f8bd18-5e49-43cb-972a-e15b474d3d2c</UserSecretsId>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,6 +14,10 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0-rc.2.24474.3"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="ShopApiTest" />
     </ItemGroup>
 
 </Project>
