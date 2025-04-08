@@ -26,4 +26,14 @@ public class AuthenticationTests : IClassFixture<ShopApiApplicationFactory>
         
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
+
+    [Fact]
+    public async Task GetToken_ReturnsBadRequest()
+    {
+        var client = new ShopApiApplicationFactory().CreateClient();
+
+        var response = await client.PostAsync("/api/v1/token", null);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
 }
