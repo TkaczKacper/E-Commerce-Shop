@@ -33,15 +33,15 @@ public class NegotiationController : ControllerBase
 
     [HttpPatch("{negotiationId:int}/respond")]
     [Authorize(Roles = "Employee")]
-    public async Task<IActionResult> RespondToNegotiation(int negotiationId, [FromBody] bool accept)
+    public async Task<IActionResult> RespondToNegotiation(int negotiationId, [FromBody] RespondToNegotiationDTO respond)
     {
-        var res = await _negotiationService.RespondToNegotiation(negotiationId, accept);
+        var res = await _negotiationService.RespondToNegotiation(negotiationId, respond);
 
         return Ok(res);
     }
 
     [HttpPatch("{negotiationId:int}/propose")]
-    public async Task<IActionResult> ProposeNewPrice(int negotiationId, [FromBody] decimal newPrice)
+    public async Task<IActionResult> ProposeNewPrice(int negotiationId, [FromBody] ProposeNewPriceDTO newPrice)
     {
         var negotiation = await _negotiationService.ProposeNewPrice(negotiationId, newPrice);
         

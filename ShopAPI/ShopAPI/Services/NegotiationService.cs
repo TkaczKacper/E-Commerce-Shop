@@ -87,9 +87,9 @@ public class NegotiationService : INegotiationService
         return newNegotiation;
     }
 
-    public async Task<Negotiation> ProposeNewPrice(int negotiationId, decimal proposedPrice)
+    public async Task<Negotiation> ProposeNewPrice(int negotiationId, ProposeNewPriceDTO proposedPrice)
     {
-        if (proposedPrice is <= 0)
+        if (proposedPrice.NewPrice is <= 0)
             throw new ArgumentException("Price must be greater than zero.");
         
         var negotiation = await _context.Negotiations.FindAsync(negotiationId);
@@ -120,7 +120,7 @@ public class NegotiationService : INegotiationService
         }
         
         negotiation.AttemptCount++;
-        negotiation.ProposedPrice = proposedPrice;
+        negotiation.ProposedPrice = proposedPrice.NewPrice;
         negotiation.UpdatedAt = DateTime.UtcNow;
         negotiation.Status = NegotiationStatus.Pending;
         
@@ -130,7 +130,7 @@ public class NegotiationService : INegotiationService
         return negotiation;
     }
 
-    public async Task<string> RespondToNegotiation(int negotiationId, bool accepted)
+    public async Task<string> RespondToNegotiation(int negotiationId, RespondToNegotiationDTO respond)
     {
         var negotiation = await _context.Negotiations.FindAsync(negotiationId);
         
@@ -145,7 +145,7 @@ public class NegotiationService : INegotiationService
 
         var respondMessage = "";
         
-        if (accepted)
+        if (respond.Accept)
         {
             negotiation.Status = NegotiationStatus.Accepted;
             respondMessage = "Accepted.";
